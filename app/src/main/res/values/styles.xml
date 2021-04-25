@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SortingTabText" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="FilterButton" parent="@android:style/TextAppearance.Widget.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="SuburbText" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TemperatureText" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/teal_200</item>
+    </style>
+
+</resources>

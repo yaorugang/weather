@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Weather</string>
+
+    <string name="tab_item_sort_by_alphabetic">A-Z</string>
+    <string name="tab_item_sort_by_temperature">Temperature</string>
+    <string name="tab_item_sort_by_last_update">Last updated</string>
+
+    <string name="filter_button">Filter</string>
+
+    <string name="update_success">Weather update success!</string>
+    <string name="update_failure">Something wrong, please try again!</string>
+
+    <string name="refresh_menu">Refresh</string>
+
+</resources>
