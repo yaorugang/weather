@@ -19,6 +19,10 @@ class WeatherManager @Inject constructor(private val weatherRepository: WeatherR
         return weatherRepository.getCountryListFromCache()
     }
 
+    suspend fun getSelectedCountry(): Country? {
+        return weatherRepository.getSelectedCountryFromCache()
+    }
+
     suspend fun getWeatherReportsByCountry(country: Country, withRefresh: Boolean = false): List<WeatherReport> {
         return if (withRefresh) {
             fetchAllWeatherReports()

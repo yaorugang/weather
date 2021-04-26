@@ -1,28 +1,26 @@
-package com.yaorugang.weather.ui
+package com.yaorugang.weather.ui.fragments
 
 import androidx.lifecycle.*
 import com.yaorugang.weather.domain.models.Country
 import com.yaorugang.weather.domain.models.WeatherReport
 import com.yaorugang.weather.domain.usecases.WeatherManager
+import com.yaorugang.weather.ui.liveDataChecker
 import com.yaorugang.weather.ui.utils.formatAsDefault
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val weatherManager: WeatherManager): ViewModel() {
+class WeatherReportsViewModel @Inject constructor(private val weatherManager: WeatherManager): ViewModel() {
 
     private val _allWeatherReports = MutableLiveData<List<WeatherReport>>()
 
 
-    private val _refreshMessage = MutableLiveData<String>()
-    val refreshMessage: LiveData<String> = _refreshMessage
 
     private val _selectedCountry = MutableLiveData<Country>()
     private val _sortingType = MutableLiveData<SortingType>()
 
     val weatherReports: LiveData<List<WeatherReport>> = liveDataChecker(_allWeatherReports, _selectedCountry, _sortingType) { allWeatherReports, selectedCountry, sortingType ->
-        allWeatherReports?.filter {
-            it.country.id == selectedCountry?.id
+        allWeatherReports?.filter { weatherReport ->
+            if (selectedCountry == null) true else (selectedCountry.id == weatherReport.country.id)
         }?.sortedBy {
             when (sortingType) {
                 SortingType.Alphabetic -> it.suburbName
@@ -33,13 +31,26 @@ class MainViewModel @Inject constructor(private val weatherManager: WeatherManag
         } ?: emptyList()
     }
 
+    private val _navigateToCountrySelection = MutableLiveData<Unit>()
+    val navigateToCountrySelection: LiveData<Unit> = _navigateToCountrySelection
+
+    private val _refreshMessage = MutableLiveData<String>()
+    val refreshMessage: LiveData<String> = _refreshMessage
+
     fun onStart() {
+        getSelectedCountry()
         fetchWeatherReports()
     }
 
     fun fetchWeatherReports() {
         viewModelScope.launch {
-            weatherManager.fetchAllWeatherReports()
+            _allWeatherReports.value = weatherManager.fetchAllWeatherReports()
+        }
+    }
+
+    private fun getSelectedCountry() {
+        viewModelScope.launch {
+            _selectedCountry.value = weatherManager.getSelectedCountry()
         }
     }
 
@@ -53,6 +64,10 @@ class MainViewModel @Inject constructor(private val weatherManager: WeatherManag
 
     fun onSortByLastUpdate() {
         _sortingType.value = SortingType.LastUpdate
+    }
+
+    fun onFilterButtonClick() {
+        _navigateToCountrySelection.value = Unit
     }
 
     private enum class SortingType {

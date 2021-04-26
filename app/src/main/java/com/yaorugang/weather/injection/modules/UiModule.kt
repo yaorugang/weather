@@ -3,8 +3,11 @@ package com.yaorugang.weather.injection.modules
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.yaorugang.weather.injection.ViewModelFactory
+import com.yaorugang.weather.ui.fragments.CountrySelectionDialog
+import com.yaorugang.weather.ui.fragments.CountrySelectionViewModel
 import com.yaorugang.weather.ui.MainActivity
-import com.yaorugang.weather.ui.MainViewModel
+import com.yaorugang.weather.ui.fragments.WeatherReportsFragment
+import com.yaorugang.weather.ui.fragments.WeatherReportsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -19,8 +22,19 @@ abstract class UiModule {
     @ContributesAndroidInjector
     abstract fun mainActivity(): MainActivity
 
+    @ContributesAndroidInjector
+    abstract fun weatherReportsFragment(): WeatherReportsFragment
+
+    @ContributesAndroidInjector
+    abstract fun countrySelectionDialog(): CountrySelectionDialog
+
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+    @ViewModelKey(WeatherReportsViewModel::class)
+    abstract fun bindWeatherReportsViewModel(viewModel: WeatherReportsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CountrySelectionViewModel::class)
+    abstract fun bindCountrySelectionViewModel(viewModel: CountrySelectionViewModel): ViewModel
 }

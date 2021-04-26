@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/weather_reports_fragment">
+
+    <fragment
+        android:id="@+id/weather_reports_fragment"
+        android:name="com.yaorugang.weather.ui.fragments.WeatherReportsFragment"
+        tools:layout="@layout/weather_reports_fragment">
+
+        <action
+            android:id="@+id/action_to_country_selection_dialog"
+            app:destination="@id/country_selection_dialog" />
+
+    </fragment>
+
+    <dialog
+        android:id="@+id/country_selection_dialog"
+        android:name="com.yaorugang.weather.ui.fragments.CountrySelectionDialog"
+        tools:layout="@layout/country_selection_fragment" />
+
+</navigation>

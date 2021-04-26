@@ -33,28 +33,28 @@
             tools:ignore="contentDescription" />
 
         <TextView
-            android:id="@+id/suburb_name"
+            android:id="@+id/suburb_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{suburb}"
             app:layout_constraintStart_toEndOf="@id/weather_icon"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/weather_condition"
+            app:layout_constraintBottom_toTopOf="@id/weather_condition_textview"
             android:textAppearance="@style/SuburbText"
             tools:text="Box Hill"/>
 
         <TextView
-            android:id="@+id/weather_condition"
+            android:id="@+id/weather_condition_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{weatherCondition}"
             app:layout_constraintStart_toEndOf="@id/weather_icon"
-            app:layout_constraintTop_toBottomOf="@id/suburb_name"
+            app:layout_constraintTop_toBottomOf="@id/suburb_textview"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Rain"/>
 
         <TextView
-            android:id="@+id/temperature"
+            android:id="@+id/temperature_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
