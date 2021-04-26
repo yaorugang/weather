@@ -21,9 +21,7 @@ class WeatherRepositoryImpl @Inject constructor(
 ): WeatherRepository {
 
     override suspend fun getCountryListFromCache(): List<Country> {
-        return getAllWeatherReportsFromCache().map {
-            it.country
-        }
+        return secureStorage.getCountries() ?: emptyList()
     }
 
     override suspend fun getSelectedCountryFromCache(): Country? {
@@ -43,6 +41,7 @@ class WeatherRepositoryImpl @Inject constructor(
             val response = weatherApi.weatherReports()
             val weatherReports = response.data.map { weatherReportMapper(it) }
             secureStorage.saveWeatherReports(weatherReports)
+            secureStorage.saveCountries(weatherReports.distinctBy { it.country.id }.map { it.country })
         } catch (e: Exception) {
             throw exceptionMapper(e)
         }

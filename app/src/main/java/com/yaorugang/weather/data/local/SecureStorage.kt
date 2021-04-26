@@ -15,6 +15,10 @@ interface SecureStorage {
 
     suspend fun getWeatherReports(): List<WeatherReport>?
 
+    suspend fun saveCountries(countries: List<Country>)
+
+    suspend fun getCountries(): List<Country>?
+
     suspend fun saveSelectedCountry(country: Country)
 
     suspend fun getSelectedCountry(): Country?
@@ -35,6 +39,15 @@ class SharedPreferenceStorage @Inject constructor(context: Context, private val 
         return gson.fromJson(get(WEATHER_REPORTS_KEY), type)
     }
 
+    override suspend fun saveCountries(countries: List<Country>) = save(
+        COUNTRY_LIST_KEY, gson.toJson(countries)
+    )
+
+    override suspend fun getCountries(): List<Country>? {
+        val type: Type = object : TypeToken<List<Country?>?>() {}.type
+        return gson.fromJson(get(COUNTRY_LIST_KEY), type)
+    }
+
     override suspend fun saveSelectedCountry(country: Country) = save(
         SELECTED_COUNTRY_KEY, gson.toJson(country)
     )
@@ -50,5 +63,6 @@ class SharedPreferenceStorage @Inject constructor(context: Context, private val 
         private const val PREFS_NAME = "news_perform_storage"
         private const val WEATHER_REPORTS_KEY = "weather_reports_key"
         private const val SELECTED_COUNTRY_KEY = "selected_country_key"
+        private const val COUNTRY_LIST_KEY = "country_list_key"
     }
 }
