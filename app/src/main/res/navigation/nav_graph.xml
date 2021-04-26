@@ -15,6 +15,10 @@
             android:id="@+id/action_to_country_selection_dialog"
             app:destination="@id/country_selection_fragment" />
 
+        <action
+            android:id="@+id/action_to_weather_details_fragment"
+            app:destination="@id/weather_details_fragment" />
+
     </fragment>
 
     <fragment
@@ -22,5 +26,17 @@
         android:label="@string/country_selection_label"
         android:name="com.yaorugang.weather.ui.fragments.CountrySelectionFragment"
         tools:layout="@layout/country_selection_fragment" />
+
+    <fragment
+        android:id="@+id/weather_details_fragment"
+        android:label="@string/weather_details_label"
+        android:name="com.yaorugang.weather.ui.fragments.WeatherDetailsFragment"
+        tools:layout="@layout/weather_details_layout">
+
+        <argument
+            android:name="weatherReport"
+            app:argType="com.yaorugang.weather.domain.models.WeatherReport"/>
+
+    </fragment>
 
 </navigation>

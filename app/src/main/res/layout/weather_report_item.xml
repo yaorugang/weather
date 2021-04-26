@@ -5,23 +5,15 @@
 
     <data>
         <variable
-            name="suburb"
-            type="String" />
-
-        <variable
-            name="weatherCondition"
-            type="String" />
-
-        <variable
-            name="temperature"
-            type="String" />
-
+            name="weatherItem"
+            type="com.yaorugang.weather.ui.fragments.WeatherReportsViewModel.WeatherItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="8dp">
+        android:paddingVertical="8dp"
+        android:onClick="@{() -> weatherItem.onItemClick()}">
 
         <ImageView
             android:id="@+id/weather_icon"
@@ -36,7 +28,7 @@
             android:id="@+id/suburb_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{suburb}"
+            android:text="@{weatherItem.weatherReport.suburbName}"
             app:layout_constraintStart_toEndOf="@id/weather_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/weather_condition_textview"
@@ -47,7 +39,7 @@
             android:id="@+id/weather_condition_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{weatherCondition}"
+            android:text="@{weatherItem.weatherReport.weatherCondition}"
             app:layout_constraintStart_toEndOf="@id/weather_icon"
             app:layout_constraintTop_toBottomOf="@id/suburb_textview"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -60,7 +52,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{temperature}"
+            android:text="@{weatherItem.weatherReport.weatherTemp}"
             android:textAppearance="@style/TemperatureText"
             tools:text="19"/>
 

@@ -25,6 +25,9 @@ abstract class UiModule {
     @ContributesAndroidInjector
     abstract fun countrySelectionFragment(): CountrySelectionFragment
 
+    @ContributesAndroidInjector
+    abstract fun weatherDetailsFragment(): WeatherDetailsFragment
+
     @Binds
     @IntoMap
     @ViewModelKey(WeatherReportsViewModel::class)
@@ -34,4 +37,9 @@ abstract class UiModule {
     @IntoMap
     @ViewModelKey(CountrySelectionViewModel::class)
     abstract fun bindCountrySelectionViewModel(viewModel: CountrySelectionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WeatherDetailsViewModel::class)
+    abstract fun bindWeatherDetailsViewModel(viewModel: WeatherDetailsViewModel): ViewModel
 }

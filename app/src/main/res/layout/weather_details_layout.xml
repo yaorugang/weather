@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.yaorugang.weather.ui.fragments.WeatherDetailsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/suburb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.weatherReport.suburbName}"
+                android:textAppearance="@style/SuburbText"
+                app:layout_constraintBottom_toTopOf="@id/weather_condition"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Box Hill" />
+
+            <TextView
+                android:id="@+id/weather_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.weatherReport.weatherCondition}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/suburb"
+                tools:text="Rain" />
+
+            <TextView
+                android:id="@+id/temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.weatherReport.weatherTemp}"
+                android:textAppearance="@style/TemperatureText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="19" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/divider_first"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@android:color/darker_gray"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/feels_like_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/humidity_title"
+                android:text="@string/weather_details_feels_like"
+                android:textAppearance="@style/WeatherConditionTitle"/>
+
+            <TextView
+                android:id="@+id/humidity_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/feels_like_title"
+                app:layout_constraintEnd_toStartOf="@id/wind_title"
+                android:text="@string/weather_details_Humidity"
+                android:textAppearance="@style/WeatherConditionTitle"/>
+
+            <TextView
+                android:id="@+id/wind_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/humidity_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/weather_details_wind"
+                android:textAppearance="@style/WeatherConditionTitle"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/feels_like_title"
+                app:layout_constraintEnd_toEndOf="@id/feels_like_title"
+                app:layout_constraintTop_toBottomOf="@id/feels_like_title"
+                android:textAppearance="@style/WeatherConditionValue"
+                android:text="@{viewModel.weatherReport.weatherFeelsLike}"
+                tools:text="16"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/humidity_title"
+                app:layout_constraintEnd_toEndOf="@id/humidity_title"
+                app:layout_constraintTop_toBottomOf="@id/humidity_title"
+                android:textAppearance="@style/WeatherConditionValue"
+                android:text="@{viewModel.weatherReport.weatherHumidity}"
+                tools:text="20%"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/wind_title"
+                app:layout_constraintEnd_toEndOf="@id/wind_title"
+                app:layout_constraintTop_toBottomOf="@id/wind_title"
+                android:textAppearance="@style/WeatherConditionValue"
+                android:text="@{viewModel.weatherReport.weatherWind}"
+                tools:text="ESE at 17kph"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/divider_second"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@{viewModel.formattedLastReport}"
+            android:gravity="center_horizontal"
+            tools:text="Last updated: 9:00am 01 December 2017"/>
+
+    </LinearLayout>
+
+</layout>

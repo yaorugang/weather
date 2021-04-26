@@ -61,6 +61,10 @@ class WeatherReportsFragment: DaggerFragment() {
         viewModel.navigateToCountrySelection.observe(viewLifecycleOwner, EventObserver {
             findNavController().navigate(WeatherReportsFragmentDirections.actionToCountrySelectionDialog())
         })
+
+        viewModel.navigateToWeatherDetails.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(WeatherReportsFragmentDirections.actionToWeatherDetailsFragment(it))
+        })
     }
 
     override fun onStart() {

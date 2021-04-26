@@ -13,5 +13,10 @@
     <string name="ok_button">Ok</string>
 
     <string name="country_selection_label">Select Country</string>
+    <string name="weather_details_label">Weather details</string>
+
+    <string name="weather_details_feels_like">Feels Like</string>
+    <string name="weather_details_Humidity">Humidity</string>
+    <string name="weather_details_wind">Wind</string>
 
 </resources>
