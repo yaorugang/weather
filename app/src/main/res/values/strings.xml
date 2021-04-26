@@ -10,8 +10,8 @@
     <string name="update_success">Weather update success!</string>
     <string name="update_failure">Something wrong, please try again!</string>
 
-    <string name="refresh_menu">Refresh</string>
-
     <string name="ok_button">Ok</string>
+
+    <string name="country_selection_label">Select Country</string>
 
 </resources>

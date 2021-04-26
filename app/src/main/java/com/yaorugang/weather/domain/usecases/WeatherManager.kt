@@ -23,13 +23,21 @@ class WeatherManager @Inject constructor(private val weatherRepository: WeatherR
         return weatherRepository.getSelectedCountryFromCache()
     }
 
-    suspend fun getWeatherReportsByCountry(country: Country, withRefresh: Boolean = false): List<WeatherReport> {
-        return if (withRefresh) {
+    suspend fun saveSelectedCountry(country: Country) {
+        weatherRepository.saveSelectedCountryToCache(country)
+    }
+
+    suspend fun getWeatherReportsBySelectedCountry(withRefresh: Boolean = false): List<WeatherReport> {
+        val weatherReports = if (withRefresh) {
             fetchAllWeatherReports()
         } else {
             weatherRepository.getAllWeatherReportsFromCache()
-        }.filter {
-            it.country.id == country.id
         }
+
+        return weatherRepository.getSelectedCountryFromCache()?.let { selectedCountry ->
+            weatherReports.filter {
+                it.country.id == selectedCountry.id
+            }
+        } ?: weatherReports
     }
 }

@@ -1,6 +1,7 @@
 package com.yaorugang.weather.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.yaorugang.weather.databinding.WeatherReportsFragmentBinding
+import com.yaorugang.weather.ui.utils.EventObserver
 import dagger.android.support.DaggerFragment
+import java.util.*
 import javax.inject.Inject
 
 class WeatherReportsFragment: DaggerFragment() {
@@ -20,6 +23,11 @@ class WeatherReportsFragment: DaggerFragment() {
     private val viewModel: WeatherReportsViewModel by viewModels { viewModelFactory }
 
     private lateinit var binding: WeatherReportsFragmentBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.onCreate()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = WeatherReportsFragmentBinding.inflate(inflater, container, false)
@@ -50,9 +58,9 @@ class WeatherReportsFragment: DaggerFragment() {
             }
         })
 
-        viewModel.navigateToCountrySelection.observe(viewLifecycleOwner) {
+        viewModel.navigateToCountrySelection.observe(viewLifecycleOwner, EventObserver {
             findNavController().navigate(WeatherReportsFragmentDirections.actionToCountrySelectionDialog())
-        }
+        })
     }
 
     override fun onStart() {

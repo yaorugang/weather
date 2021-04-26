@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.yaorugang.weather.databinding.CountrySelectionFragmentBinding
-import dagger.android.support.DaggerDialogFragment
+import com.yaorugang.weather.ui.utils.EventObserver
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class CountrySelectionDialog: DaggerDialogFragment() {
+class CountrySelectionFragment: DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -19,7 +21,8 @@ class CountrySelectionDialog: DaggerDialogFragment() {
 
     private lateinit var binding: CountrySelectionFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = CountrySelectionFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -28,6 +31,10 @@ class CountrySelectionDialog: DaggerDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        viewModel.navigateBack.observe(viewLifecycleOwner, EventObserver{
+            findNavController().navigateUp()
+        })
     }
 
     override fun onStart() {

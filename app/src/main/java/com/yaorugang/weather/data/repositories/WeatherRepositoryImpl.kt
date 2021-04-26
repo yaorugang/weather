@@ -28,6 +28,14 @@ class WeatherRepositoryImpl @Inject constructor(
         return secureStorage.getSelectedCountry()
     }
 
+    override suspend fun saveSelectedCountryToCache(country: Country) {
+        try {
+            secureStorage.saveSelectedCountry(country)
+        } catch (e: Exception) {
+            throw exceptionMapper(e)
+        }
+    }
+
     override suspend fun getAllWeatherReportsFromCache(): List<WeatherReport> = withContext(Dispatchers.IO) {
         try {
             secureStorage.getWeatherReports() ?: throw Exception()

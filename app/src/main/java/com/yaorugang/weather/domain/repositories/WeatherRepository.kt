@@ -7,6 +7,8 @@ interface WeatherRepository {
 
     suspend fun getCountryListFromCache(): List<Country>
 
+    suspend fun saveSelectedCountryToCache(country: Country)
+
     suspend fun getSelectedCountryFromCache(): Country?
 
     suspend fun getAllWeatherReportsFromCache(): List<WeatherReport>
